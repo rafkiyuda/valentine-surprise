@@ -73,7 +73,7 @@ const Letter = ({ onOpenMemories }) => {
                             </motion.div>
                         )}
 
-                        <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 text-rose-500 font-custom text-xl animate-bounce whitespace-nowrap bg-white/50 px-6 py-2 rounded-full border border-pink-200">
+                        <div className="absolute -bottom-20 left-0 right-0 text-center text-rose-500 font-custom text-xl animate-bounce">
                             ✨ Tap to Open ✨
                         </div>
                     </div>
