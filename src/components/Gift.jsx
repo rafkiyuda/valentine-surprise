@@ -28,7 +28,7 @@ const Gift = ({ onComplete }) => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full place-items-center mb-16">
                 {gifts.map((gift, index) => (
-                    <div key={gift.id} className="flex flex-col items-center gap-6 w-full max-w-[280px]">
+                    <div key={gift.id} className="flex flex-col items-center gap-6 w-full max-w-sm">
                         {/* Question / Label FIRST */}
                         <p className="text-pink-500 font-bold font-custom text-2xl text-center min-h-[3rem] flex items-end">
                             {gift.label}
@@ -38,7 +38,7 @@ const Gift = ({ onComplete }) => {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={() => handleOpen(gift.id)}
-                            className="relative cursor-pointer w-full aspect-[3/4]"
+                            className="relative cursor-pointer w-full aspect-video"
                         >
                             {!openedGifts.includes(gift.id) ? (
                                 <motion.div
