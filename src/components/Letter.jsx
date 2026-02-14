@@ -82,45 +82,47 @@ const Letter = ({ onOpenMemories }) => {
                 <motion.div
                     initial={{ opacity: 0, scale: 0.8, y: 50 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
-                    className="bg-white/95 backdrop-blur-sm p-8 md:p-12 rounded-[2rem] shadow-2xl relative border-4 border-pink-200 max-w-2xl w-full mx-4"
+                    className="bg-white/95 backdrop-blur-sm p-6 md:p-12 rounded-[2rem] shadow-2xl relative border-4 border-pink-200 max-w-4xl w-full mx-4 h-[80vh] flex flex-col"
                 >
                     <button
                         onClick={() => setIsFullView(false)}
-                        className="absolute top-6 right-6 text-gray-400 hover:text-pink-500 transition-colors"
+                        className="absolute top-6 right-6 text-gray-400 hover:text-pink-500 transition-colors z-10"
                     >
                         <span className="text-sm uppercase font-bold tracking-widest border-b-2 border-transparent hover:border-pink-300">Close</span>
                     </button>
 
-                    <MailOpen className="text-pink-400 mx-auto mb-6 drop-shadow-sm" size={56} />
+                    <div className="flex-1 overflow-y-auto custom-scrollbar px-4 md:px-8 py-4">
+                        <MailOpen className="text-pink-400 mx-auto mb-6 drop-shadow-sm" size={56} />
 
-                    <div className="prose prose-pink mx-auto font-serif text-lg md:text-xl leading-relaxed text-gray-700 max-h-[60vh] overflow-y-auto custom-scrollbar px-2">
-                        <p className="first-letter:text-5xl first-letter:font-bold first-letter:text-pink-500 first-letter:float-left first-letter:mr-2">
-                            My Dearest Valentine,
-                        </p>
-                        <br />
-                        <p>
-                            As I put this digital letter together, I find myself thinking about all the little moments that make us, "us".
-                            Even though we might be apart right now, or simply unable to see each other as much as we'd like,
-                            I want you to know that you are always on my mind.
-                        </p>
-                        <br />
-                        <p>
-                            This website is just a small token of my appreciation for you. I hope the silly game made you smile
-                            and the photos brought back some warm memories. I'm looking forward to the day we can celebrate
-                            properly, face to face.
-                        </p>
-                        <br />
-                        <p>
-                            Until then, know that I'm cheering for you, missing you, and loving you.
-                            Happy Valentine's Day!
-                        </p>
-                        <br />
-                        <p className="text-right font-bold text-pink-600 font-handwriting text-2xl mt-8">
-                            — With all my love ❤️
-                        </p>
+                        <div className="font-serif text-lg md:text-xl leading-relaxed text-gray-700 text-left">
+                            <p className="first-letter:text-5xl first-letter:font-bold first-letter:text-pink-500 first-letter:float-left first-letter:mr-2">
+                                My Dearest Valentine,
+                            </p>
+                            <br />
+                            <p>
+                                As I put this digital letter together, I find myself thinking about all the little moments that make us, "us".
+                                Even though we might be apart right now, or simply unable to see each other as much as we'd like,
+                                I want you to know that you are always on my mind.
+                            </p>
+                            <br />
+                            <p>
+                                This website is just a small token of my appreciation for you. I hope the silly game made you smile
+                                and the photos brought back some warm memories. I'm looking forward to the day we can celebrate
+                                properly, face to face.
+                            </p>
+                            <br />
+                            <p>
+                                Until then, know that I'm cheering for you, missing you, and loving you.
+                                Happy Valentine's Day!
+                            </p>
+                            <br />
+                            <p className="text-right font-bold text-pink-600 font-handwriting text-2xl mt-8">
+                                — With all my love ❤️
+                            </p>
+                        </div>
                     </div>
 
-                    <div className="mt-8 pt-6 border-t border-pink-100 flex flex-col items-center gap-4">
+                    <div className="pt-6 border-t border-pink-100 flex flex-col items-center gap-4 shrink-0">
                         <button
                             onClick={onOpenMemories}
                             className="w-full md:w-auto px-12 py-4 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-full font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all animate-pulse"
