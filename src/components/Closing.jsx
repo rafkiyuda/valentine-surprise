@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 
 const Closing = () => {
+    const [imageLoaded, setImageLoaded] = useState(false);
+
     return (
         <div className="min-h-screen w-full flex flex-col items-center justify-center p-4 relative overflow-hidden">
 
@@ -20,16 +23,19 @@ const Closing = () => {
                         {/* Placeholder for user's animated photo */}
                         <div className="flex flex-col items-center justify-center h-full text-pink-400 opacity-50">
                             <span className="text-6xl mb-4">💑</span>
-                            <span className="font-handwriting text-xl">Our Animated Photo Here</span>
+                            <span className="font-handwriting text-xl">Loading...</span>
                         </div>
                     </div>
                     {/* Placeholder content - User will replace src */}
                     <img
                         src="/assets/closing.png"
                         alt="Us"
-                        className="w-full h-full object-cover relative z-10 opacity-0" // Hidden by default until user adds image
-                        onError={(e) => e.target.style.opacity = 0}
-                        onLoad={(e) => e.target.style.opacity = 1}
+                        className={`w-full h-full object-cover relative z-10 transition-opacity duration-1000 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                        onLoad={() => setImageLoaded(true)}
+                        onError={(e) => {
+                            // Fallback if png missing, try gif or just keep placeholder
+                            console.log("Image failed to load");
+                        }}
                     />
 
                     {/* Overlay Shine */}
