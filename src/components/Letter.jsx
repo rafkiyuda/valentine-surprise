@@ -14,13 +14,13 @@ const Letter = ({ onOpenMemories }) => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen w-full px-4 overflow-hidden relative">
+        <div className="flex flex-col items-center justify-center w-full px-4 relative z-10">
 
             {/* Background Atmosphere */}
-            <div className="absolute inset-0 bg-gradient-to-br from-pink-100/50 to-white pointer-events-none -z-10"></div>
+            <div className="absolute inset-0 pointer-events-none -z-10"></div>
 
             {!isFullView ? (
-                <div className="transform scale-110 md:scale-125">
+                <div className="transform scale-100 md:scale-110 transition-transform duration-500">
                     <div className="relative w-80 h-52 cursor-pointer group perspective-1000" onClick={handleOpen}>
 
                         {/* Envelope Shadow */}
@@ -80,52 +80,53 @@ const Letter = ({ onOpenMemories }) => {
                 </div>
             ) : (
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.8, y: 50 }}
+                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
-                    className="bg-white/95 backdrop-blur-sm p-6 md:p-12 rounded-[2rem] shadow-2xl relative border-4 border-pink-200 max-w-4xl w-full mx-4 h-[80vh] flex flex-col"
+                    className="bg-white/95 backdrop-blur-xl p-6 md:p-10 rounded-3xl shadow-2xl relative max-w-3xl w-full mx-auto flex flex-col gap-6"
                 >
                     <button
                         onClick={() => setIsFullView(false)}
-                        className="absolute top-6 right-6 text-gray-400 hover:text-pink-500 transition-colors z-10"
+                        className="absolute top-4 right-4 p-2 text-gray-400 hover:text-pink-600 hover:bg-pink-50 rounded-full transition-all z-10"
                     >
-                        <span className="text-sm uppercase font-bold tracking-widest border-b-2 border-transparent hover:border-pink-300">Close</span>
+                        <span className="sr-only">Close</span>
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
 
-                    <div className="flex-1 overflow-y-auto custom-scrollbar px-4 md:px-8 py-4">
-                        <MailOpen className="text-pink-400 mx-auto mb-6 drop-shadow-sm" size={56} />
+                    <div className="flex-1 overflow-y-auto custom-scrollbar px-2 py-2 text-center">
+                        <MailOpen className="text-pink-500 mx-auto mb-4 drop-shadow-md" size={48} />
 
-                        <div className="font-serif text-lg md:text-xl leading-relaxed text-gray-700 text-left">
-                            <p className="first-letter:text-5xl first-letter:font-bold first-letter:text-pink-500 first-letter:float-left first-letter:mr-2">
+                        <div className="font-serif text-lg md:text-xl leading-relaxed text-gray-800 text-left space-y-4">
+                            <p className="text-3xl font-bold text-pink-600 mb-4 font-custom">
                                 My Dearest Valentine,
                             </p>
-                            <br />
+
                             <p>
                                 As I put this digital letter together, I find myself thinking about all the little moments that make us, "us".
                                 Even though we might be apart right now, or simply unable to see each other as much as we'd like,
                                 I want you to know that you are always on my mind.
                             </p>
-                            <br />
+
                             <p>
                                 This website is just a small token of my appreciation for you. I hope the silly game made you smile
                                 and the photos brought back some warm memories. I'm looking forward to the day we can celebrate
                                 properly, face to face.
                             </p>
-                            <br />
+
                             <p>
                                 Until then, know that I'm cheering for you, missing you, and loving you.
                                 Happy Valentine's Day!
                             </p>
-                            <br />
-                            <p className="text-right font-bold text-pink-600 font-handwriting text-2xl mt-8">
+
+                            <p className="text-right font-bold text-pink-600 font-handwriting text-3xl mt-8 transform -rotate-2">
                                 — With all my love ❤️
                             </p>
                         </div>
                     </div>
 
-                    <div className="pt-6 border-t border-pink-100 flex flex-col items-center gap-4 shrink-0">
+                    <div className="pt-4 border-t border-pink-100 flex justify-center shrink-0">
                         <button
                             onClick={onOpenMemories}
-                            className="w-full md:w-auto px-12 py-4 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-full font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all animate-pulse"
+                            className="px-8 py-3 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-full font-bold text-lg shadow-lg hover:shadow-pink-300/50 hover:scale-105 transition-all animate-pulse"
                         >
                             See Our Memories 📸
                         </button>
