@@ -8,6 +8,7 @@ import Gift from './components/Gift';
 import Proposal from './components/Proposal';
 import Gallery from './components/Gallery';
 import Letter from './components/Letter';
+import Closing from './components/Closing';
 
 function App() {
   const [stage, setStage] = useState('intro'); // intro, game, proposal, letter, gallery, gift
