@@ -25,7 +25,7 @@ const Closing = () => {
                     </div>
                     {/* Placeholder content - User will replace src */}
                     <img
-                        src="/assets/closing.gif"
+                        src="/assets/closing.png"
                         alt="Us"
                         className="w-full h-full object-cover relative z-10 opacity-0" // Hidden by default until user adds image
                         onError={(e) => e.target.style.opacity = 0}
