@@ -1,8 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Gift as GiftIcon, Heart, Coffee, Smile } from 'lucide-react';
 
 const Gift = ({ onComplete }) => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     const [openedGifts, setOpenedGifts] = useState([]);
 
     const gifts = [
