@@ -10,79 +10,93 @@ const Letter = ({ onOpenMemories }) => {
         setIsOpen(true);
         setTimeout(() => {
             setIsFullView(true);
-        }, 800); // Wait for animation
+        }, 800);
     };
 
     return (
-        <div className="flex flex-col items-center justify-center py-20 min-h-[60vh] w-full px-4 overflow-hidden">
+        <div className="flex flex-col items-center justify-center min-h-screen w-full px-4 overflow-hidden relative">
+
+            {/* Background Atmosphere */}
+            <div className="absolute inset-0 bg-gradient-to-br from-pink-100/50 to-white pointer-events-none -z-10"></div>
 
             {!isFullView ? (
-                <div className="relative w-72 h-48 cursor-pointer group" onClick={handleOpen}>
+                <div className="transform scale-110 md:scale-125">
+                    <div className="relative w-80 h-52 cursor-pointer group perspective-1000" onClick={handleOpen}>
 
-                    {/* Envelope Body */}
-                    <motion.div
-                        layoutId="envelope-body"
-                        className="absolute inset-0 bg-pink-500 rounded-lg shadow-xl z-20 flex items-end justify-center overflow-hidden"
-                    >
-                        {/* Envelope V-shape fold */}
-                        <div className="w-0 h-0 border-l-[144px] border-l-transparent border-r-[144px] border-r-transparent border-b-[96px] border-b-pink-600/50 absolute bottom-0"></div>
-                    </motion.div>
+                        {/* Envelope Shadow */}
+                        <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[90%] h-4 bg-black/20 blur-md rounded-[100%]"></div>
 
-                    {/* Envelope Flap */}
-                    <motion.div
-                        initial={{ rotateX: 0 }}
-                        animate={isOpen ? { rotateX: 180, zIndex: 0 } : { rotateX: 0, zIndex: 30 }}
-                        transition={{ duration: 0.6, ease: "easeInOut" }}
-                        className="absolute top-0 left-0 w-full h-1/2 origin-top z-30"
-                        style={{ transformStyle: 'preserve-3d' }}
-                    >
-                        <div className="absolute inset-0 bg-pink-600 rounded-t-lg" style={{ clipPath: 'polygon(0 0, 100% 0, 50% 100%)' }}></div>
-                    </motion.div>
+                        {/* Envelope Body (Back) */}
+                        <div className="absolute inset-0 bg-rose-500 rounded-lg shadow-2xl flex items-end justify-center overflow-hidden">
+                            {/* Letter Inside (Hidden part) */}
+                            <motion.div
+                                initial={{ y: 0 }}
+                                animate={isOpen ? { y: -120 } : { y: 0 }}
+                                transition={{ duration: 0.8, delay: 0.2 }}
+                                className="absolute bottom-2 w-[90%] h-[90%] bg-white rounded-lg p-4 shadow-sm z-10 flex flex-col gap-2"
+                            >
+                                <div className="w-full h-3 bg-pink-100 rounded-full"></div>
+                                <div className="w-full h-3 bg-pink-100 rounded-full"></div>
+                                <div className="w-2/3 h-3 bg-pink-100 rounded-full"></div>
+                            </motion.div>
+                        </div>
 
-                    {/* Seal / Heart */}
-                    {!isOpen && (
+                        {/* Envelope Front Folds (Left/Right/Bottom) */}
+                        <div className="absolute inset-0 z-20 pointer-events-none">
+                            <div className="absolute bottom-0 w-0 h-0 border-l-[160px] border-l-transparent border-r-[160px] border-r-transparent border-b-[110px] border-b-rose-600"></div>
+                            <div className="absolute top-0 left-0 w-0 h-0 border-l-[160px] border-l-rose-400 border-b-[104px] border-b-transparent"></div>
+                            <div className="absolute top-0 right-0 w-0 h-0 border-r-[160px] border-r-rose-400 border-b-[104px] border-b-transparent"></div>
+                        </div>
+
+                        {/* Envelope Flap (Top) - The animating part */}
                         <motion.div
-                            initial={{ scale: 1 }}
-                            whileHover={{ scale: 1.1 }}
-                            className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40 bg-red-600 w-12 h-12 rounded-full flex items-center justify-center shadow-md border-2 border-red-400"
+                            initial={{ rotateX: 0 }}
+                            animate={isOpen ? { rotateX: 180, zIndex: 0 } : { rotateX: 0, zIndex: 30 }}
+                            transition={{ duration: 0.6, ease: "easeInOut" }}
+                            className="absolute top-0 left-0 w-full h-1/2 origin-top z-30"
+                            style={{ transformStyle: 'preserve-3d' }}
                         >
-                            <span className="text-xl">💌</span>
+                            <div className="absolute inset-0 bg-rose-500 rounded-t-lg" style={{ clipPath: 'polygon(0 0, 100% 0, 50% 100%)' }}></div>
                         </motion.div>
-                    )}
 
-                    {/* The Letter Inside (Preview) */}
-                    <motion.div
-                        initial={{ y: 0 }}
-                        animate={isOpen ? { y: -100 } : { y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.4 }}
-                        className="absolute inset-x-4 top-2 bottom-2 bg-white rounded-sm shadow-sm z-10 p-4 flex flex-col items-center justify-start text-xs text-gray-400"
-                    >
-                        <div className="w-full h-2 bg-gray-200 rounded mb-2"></div>
-                        <div className="w-full h-2 bg-gray-200 rounded mb-2"></div>
-                        <div className="w-2/3 h-2 bg-gray-200 rounded"></div>
-                    </motion.div>
+                        {/* Seal / Heart */}
+                        {!isOpen && (
+                            <motion.div
+                                layoutId="seal"
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
+                                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40"
+                            >
+                                <div className="w-14 h-14 bg-red-600 rounded-full border-4 border-red-700 shadow-lg flex items-center justify-center">
+                                    <span className="text-2xl drop-shadow-md">💌</span>
+                                </div>
+                            </motion.div>
+                        )}
 
-                    <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 text-pink-400 font-handwriting text-lg animate-bounce whitespace-nowrap">
-                        Click to open
+                        <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 text-rose-500 font-custom text-xl animate-bounce whitespace-nowrap bg-white/50 px-6 py-2 rounded-full border border-pink-200">
+                            ✨ Tap to Open ✨
+                        </div>
                     </div>
                 </div>
             ) : (
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="bg-white p-8 md:p-12 rounded-lg shadow-2xl relative border-4 border-pink-100 max-w-2xl w-full"
+                    initial={{ opacity: 0, scale: 0.8, y: 50 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    className="bg-white/95 backdrop-blur-sm p-8 md:p-12 rounded-[2rem] shadow-2xl relative border-4 border-pink-200 max-w-2xl w-full mx-4"
                 >
                     <button
                         onClick={() => setIsFullView(false)}
-                        className="absolute top-4 right-4 text-gray-400 hover:text-pink-500"
+                        className="absolute top-6 right-6 text-gray-400 hover:text-pink-500 transition-colors"
                     >
-                        <span className="text-xs uppercase font-bold tracking-widest">Close</span>
+                        <span className="text-sm uppercase font-bold tracking-widest border-b-2 border-transparent hover:border-pink-300">Close</span>
                     </button>
 
-                    <MailOpen className="text-pink-300 mx-auto mb-6" size={48} />
+                    <MailOpen className="text-pink-400 mx-auto mb-6 drop-shadow-sm" size={56} />
 
-                    <div className="prose prose-pink mx-auto font-serif text-lg leading-relaxed text-gray-700">
-                        <p>My Dearest Valentine,</p>
+                    <div className="prose prose-pink mx-auto font-serif text-lg md:text-xl leading-relaxed text-gray-700 max-h-[60vh] overflow-y-auto custom-scrollbar px-2">
+                        <p className="first-letter:text-5xl first-letter:font-bold first-letter:text-pink-500 first-letter:float-left first-letter:mr-2">
+                            My Dearest Valentine,
+                        </p>
                         <br />
                         <p>
                             As I put this digital letter together, I find myself thinking about all the little moments that make us, "us".
@@ -101,15 +115,15 @@ const Letter = ({ onOpenMemories }) => {
                             Happy Valentine's Day!
                         </p>
                         <br />
-                        <p className="text-right font-bold text-pink-600">
-                            — With all my love
+                        <p className="text-right font-bold text-pink-600 font-handwriting text-2xl mt-8">
+                            — With all my love ❤️
                         </p>
                     </div>
 
                     <div className="mt-8 pt-6 border-t border-pink-100 flex flex-col items-center gap-4">
                         <button
                             onClick={onOpenMemories}
-                            className="w-full py-4 bg-pink-500 text-white rounded-full font-bold shadow-md hover:bg-pink-600 transition-colors animate-pulse mb-4"
+                            className="w-full md:w-auto px-12 py-4 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-full font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all animate-pulse"
                         >
                             See Our Memories 📸
                         </button>
