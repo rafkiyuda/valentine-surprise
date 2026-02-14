@@ -6,9 +6,9 @@ const Gift = ({ onComplete }) => {
     const [openedGifts, setOpenedGifts] = useState([]);
 
     const gifts = [
-        { id: 1, label: 'Running low on energy? 🔋', icon: <Coffee size={48} className="text-amber-600" />, content: 'Unlimited Coffee Dates ☕', sub: '(Valid whenever you need a boost!)' },
-        { id: 2, label: 'Feeling overwhelmed? 🌧️', icon: <Heart size={48} className="text-rose-500" />, content: 'Warm Hugs & Cuddles 🐻', sub: '(Redeemable 24/7, No Expiration)' },
-        { id: 3, label: 'Need a distraction? 🎬', icon: <Smile size={48} className="text-yellow-500" />, content: 'Movie Night Ticket 🍿', sub: '(You pick the movie & snacks!)' },
+        { id: 1, label: 'Running low on energy? 🔋', src: '/assets/coupons/coupon1.png', alt: 'Unlimited Coffee Coupon' },
+        { id: 2, label: 'Feeling overwhelmed? 🌧️', src: '/assets/coupons/coupon2.png', alt: 'Warm Hugs Coupon' },
+        { id: 3, label: 'Need a distraction? 🎬', src: '/assets/coupons/coupon3.png', alt: 'Movie Night Coupon' },
     ];
 
     const handleOpen = (id) => {
@@ -26,7 +26,7 @@ const Gift = ({ onComplete }) => {
                 Tap to reveal your special coupons...
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full place-items-center">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full place-items-center mb-16">
                 {gifts.map((gift, index) => (
                     <div key={gift.id} className="flex flex-col items-center gap-6 w-full max-w-[280px]">
                         {/* Question / Label FIRST */}
@@ -38,7 +38,7 @@ const Gift = ({ onComplete }) => {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={() => handleOpen(gift.id)}
-                            className="relative cursor-pointer w-full aspect-square"
+                            className="relative cursor-pointer w-full aspect-[3/4]"
                         >
                             {!openedGifts.includes(gift.id) ? (
                                 <motion.div
@@ -57,21 +57,24 @@ const Gift = ({ onComplete }) => {
                                 <motion.div
                                     initial={{ scale: 0, rotateY: 180 }}
                                     animate={{ scale: 1, rotateY: 0 }}
-                                    className="h-full bg-white p-6 rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] border-2 border-pink-100 flex flex-col items-center justify-center text-center relative overflow-hidden"
+                                    className="h-full bg-white rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] border-2 border-pink-100 overflow-hidden relative"
                                 >
-                                    <div className="absolute top-0 w-full h-2 bg-gradient-to-r from-pink-300 to-rose-300"></div>
-                                    <div className="mb-4 animate-bounce-slow bg-pink-50 p-4 rounded-full">
-                                        {gift.icon}
-                                    </div>
-                                    <h3 className="text-pink-600 font-bold text-xl mb-2 font-custom leading-tight">
-                                        {gift.content}
-                                    </h3>
-                                    <p className="text-gray-400 font-handwriting text-sm">
-                                        {gift.sub}
-                                    </p>
-                                    <div className="absolute bottom-4 text-xs font-mono text-gray-300 tracking-widest">
-                                        VALID: FOREVER
-                                    </div>
+                                    {/* Image Coupon */}
+                                    <img
+                                        src={gift.src}
+                                        alt={gift.alt}
+                                        className="w-full h-full object-cover"
+                                        onError={(e) => {
+                                            e.target.style.display = 'none';
+                                            e.target.parentElement.innerHTML = `
+                                                <div class="flex flex-col items-center justify-center h-full p-4 text-center bg-pink-50">
+                                                    <span class="text-4xl mb-2">🎟️</span>
+                                                    <p class="font-bold text-pink-500">Image Missing</p>
+                                                    <p class="text-xs text-gray-400 mt-2 break-all">${gift.src}</p>
+                                                </div>
+                                            `;
+                                        }}
+                                    />
                                 </motion.div>
                             )}
                         </motion.div>
@@ -79,21 +82,20 @@ const Gift = ({ onComplete }) => {
                 ))}
             </div>
 
-            {openedGifts.length === 3 && (
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 }}
-                    className="mt-20 text-center"
+            {/* Button Always Visible Now */}
+            <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1 }}
+                className="text-center"
+            >
+                <button
+                    onClick={onComplete}
+                    className="px-12 py-4 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-full font-bold shadow-lg hover:shadow-pink-300/50 hover:scale-105 transition-all text-xl animate-pulse"
                 >
-                    <button
-                        onClick={onComplete}
-                        className="px-12 py-4 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-full font-bold shadow-lg hover:shadow-pink-300/50 hover:scale-105 transition-all text-xl animate-pulse"
-                    >
-                        One Final Message... 💌
-                    </button>
-                </motion.div>
-            )}
+                    One Final Message... 💌
+                </button>
+            </motion.div>
         </div>
     );
 };
