@@ -97,6 +97,5 @@ const Gift = ({ onComplete }) => {
         </div>
     );
 };
-};
 
 export default Gift;
