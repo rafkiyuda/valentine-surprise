@@ -43,15 +43,15 @@ const Gallery = ({ onOpenGift }) => {
                                 onError={(e) => {
                                     e.target.style.display = 'none';
                                     e.target.parentElement.innerHTML = `
-                                      <div class="flex flex-col items-center justify-center h-full text-pink-300 w-full">
-                                        <span class="text-5xl mb-2">🖼️</span>
-                                        <span class="text-sm font-handwriting text-pink-400">Memory loading...</span>
+                                      <div class="flex flex-col items-center justify-center h-full text-pink-300 w-full bg-pink-50">
+                                        <span class="text-5xl mb-2">🎁</span>
+                                        <span class="text-lg font-custom text-pink-400">Coming Soon...</span>
                                       </div>
                                     `;
                                 }}
                             />
                         </div>
-                        <p className="mt-4 text-center text-gray-600 font-handwriting text-2xl">
+                        <p className="mt-4 text-center text-pink-600 font-custom text-xl tracking-wide">
                             {photo.caption}
                         </p>
                     </motion.div>
