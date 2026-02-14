@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Gift as GiftIcon, Heart, Coffee, Smile } from 'lucide-react';
 
-const Gift = () => {
+const Gift = ({ onComplete }) => {
     const [openedGifts, setOpenedGifts] = useState([]);
 
     const gifts = [
@@ -84,17 +84,19 @@ const Gift = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 }}
-                    className="mt-20 text-center bg-white/80 backdrop-blur px-8 py-6 rounded-2xl shadow-sm border border-pink-100 max-w-lg"
+                    className="mt-20 text-center"
                 >
-                    <p className="text-3xl text-pink-600 font-custom mb-3">One Last Thing... ❤️</p>
-                    <p className="text-gray-600 text-lg leading-relaxed font-serif">
-                        No matter clearly how many coupons you use, <br />
-                        <span className="font-bold text-pink-500">my love for you is unlimited.</span>
-                    </p>
+                    <button
+                        onClick={onComplete}
+                        className="px-12 py-4 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-full font-bold shadow-lg hover:shadow-pink-300/50 hover:scale-105 transition-all text-xl animate-pulse"
+                    >
+                        One Final Message... 💌
+                    </button>
                 </motion.div>
             )}
         </div>
     );
+};
 };
 
 export default Gift;

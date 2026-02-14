@@ -8,9 +8,10 @@ import Gift from './components/Gift';
 import Proposal from './components/Proposal';
 import Gallery from './components/Gallery';
 import Letter from './components/Letter';
+import Closing from './components/Closing';
 
 function App() {
-  const [stage, setStage] = useState('intro'); // intro, game, proposal, letter, gallery, gift
+  const [stage, setStage] = useState('intro'); // intro, game, proposal, letter, gallery, gift, closing
   const [musicStarted, setMusicStarted] = useState(false);
 
   const handleStart = () => {
@@ -32,6 +33,10 @@ function App() {
 
   const handleGalleryViewed = () => {
     setStage('gift');
+  };
+
+  const handleGiftOpened = () => {
+    setStage('closing');
   };
 
   return (
@@ -126,9 +131,22 @@ function App() {
               key="gift"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
+              exit={{ opacity: 0, y: -20 }}
               className="w-full"
             >
-              <Gift />
+              <Gift onComplete={handleGiftOpened} />
+            </motion.div>
+          )}
+
+          {/* CLOSING STAGE */}
+          {stage === 'closing' && (
+            <motion.div
+              key="closing"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="w-full"
+            >
+              <Closing />
             </motion.div>
           )}
 
